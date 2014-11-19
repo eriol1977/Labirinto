@@ -14,7 +14,7 @@ public class StoryMaker {
         this.story = new Story();
 
         createSection("HOME","Benvenuto nell'audiogioco " + title +", sarò la tua guida lungo il percorso.","Per interagire, premi una qualsiasi parte dello schermo e attendi il bip sonoro, quindi pronuncia il tuo comando in base alle possibilità elencate.","Puoi interrompermi in qualsiasi momento premendo lo schermo per impartire un comando.","Vuoi iniziare una nuova partita, caricare una partita salvata, o ascoltare le istruzioni complete?");
-        createSection("HELP","Qui troverai le istruzioni complete, quando avrò voglia di scriverle.");
+        createSection("HELP","Qui troverai le istruzioni complete, quando avrò voglia di scriverle.","Quando vuoi tornare al gioco, dimmelo pure.");
         createSection("END","La partita è giunta al termine.", "Vuoi iniziare una nuova partita, caricare una partita salvata, o uscire dal gioco?");
     }
 

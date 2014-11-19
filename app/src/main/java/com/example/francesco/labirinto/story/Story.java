@@ -68,6 +68,10 @@ public class Story implements Serializable {
             throw new StoryException();
     }
 
+    public void proceedToHelp() {
+        setCurrent(this.sections.get("HELP"));
+    }
+
     void proceedToEnd() {
         setCurrent(this.sections.get("END"));
     }
@@ -103,4 +107,6 @@ public class Story implements Serializable {
     boolean isEnded() {
         return ended;
     }
+
+
 }

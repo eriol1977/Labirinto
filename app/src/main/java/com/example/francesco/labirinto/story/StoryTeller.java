@@ -10,6 +10,8 @@ public class StoryTeller implements Serializable {
 
     private final Story story;
 
+    private Section stashed;
+
     private boolean endPhase = false;
 
     public StoryTeller(final Story story) {
@@ -37,7 +39,19 @@ public class StoryTeller implements Serializable {
 
         if(outcome.equalsIgnoreCase("ripeti"))
             return;
-        else if(outcome.contains("iniziare") || outcome.contains("nuova") || outcome.contains("partita")){
+
+        if(outcome.equalsIgnoreCase("istruzioni") || outcome.equalsIgnoreCase("aiuto")) {
+            stash();
+            this.story.proceedToHelp();
+            return;
+        }
+
+        if((outcome.contains("torna") || outcome.contains("gioco")) && stashed != null){
+            restore();
+            return;
+        }
+
+        if(outcome.contains("iniziare") || outcome.contains("nuova") || outcome.contains("partita")){
             start();
             return;
         }
@@ -89,5 +103,14 @@ public class StoryTeller implements Serializable {
 
     public boolean isEndPhase() {
         return endPhase;
+    }
+
+    private void stash(){
+        stashed = this.story.getCurrent();
+    }
+
+    private void restore() {
+        this.story.setCurrent(stashed);
+        stashed = null;
     }
 }
