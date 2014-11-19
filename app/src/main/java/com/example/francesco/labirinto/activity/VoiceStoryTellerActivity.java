@@ -23,9 +23,10 @@ import java.util.Locale;
 
 /**
  * TODOS:
- * - deve salvare i dati quando si interrompe (tipo home screen)
+ * - immagazzinare i dati quando si interrompe la partita per un po' (tipo home screen, o telefonata ricevuta...)
  * - fare il tutorial per capire meglio TTS
- * - uso di file di strings piuttosto che hardcoded
+ * - usare file di strings piuttosto che hardcoded
+ * - implementare salva e carica partita
  */
 
 public abstract class VoiceStoryTellerActivity extends Activity implements View.OnClickListener {
@@ -94,6 +95,10 @@ public abstract class VoiceStoryTellerActivity extends Activity implements View.
     @Override
     public void onClick(View v) {
         tts.stop(); // interrompe la voce
+
+        if(teller.hasToQuit())
+            finish();
+
         if (!teller.storyHasEnded()) {
             if (teller.hasOneOutcome()) {
                 teller.proceed();
@@ -136,12 +141,5 @@ public abstract class VoiceStoryTellerActivity extends Activity implements View.
     protected void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(STORY_DATA, teller);
         super.onSaveInstanceState(outState);
-    }
-
-    private void exit() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 }

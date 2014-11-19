@@ -76,6 +76,10 @@ public class Story implements Serializable {
         setCurrent(this.sections.get("END"));
     }
 
+    void proceedToQuit() {
+        setCurrent(this.sections.get("QUIT"));
+    }
+
     List<String> getOutcomes(final String id) {
         final List<Outcome> sectionOutcomes = this.outcomes.get(id);
         final List<String> result =  new ArrayList<String>(sectionOutcomes.size());

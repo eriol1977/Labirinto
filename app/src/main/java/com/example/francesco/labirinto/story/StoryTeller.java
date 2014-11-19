@@ -14,6 +14,8 @@ public class StoryTeller implements Serializable {
 
     private boolean endPhase = false;
 
+    private boolean quit = false;
+
     public StoryTeller(final Story story) {
         this.story = story;
     }
@@ -67,7 +69,8 @@ public class StoryTeller implements Serializable {
         }
 
         if (outcome.equals("esci dal gioco")) {
-            // TODO caricare partita
+            this.story.proceedToQuit();
+            quit = true;
             return;
         }
 
@@ -127,5 +130,9 @@ public class StoryTeller implements Serializable {
     private void restore() {
         this.story.setCurrent(stashed);
         stashed = null;
+    }
+
+    public boolean hasToQuit() {
+        return quit;
     }
 }
