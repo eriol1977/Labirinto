@@ -1,5 +1,7 @@
 package com.example.francesco.labirinto.story;
 
+import com.example.francesco.labirinto.activity.StoryTellerActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,43 +12,67 @@ public class StoryMaker {
 
     private final Story story;
 
-    public StoryMaker(final String title) {
+    private final StoryTellerActivity activity;
+
+    public StoryMaker(final StoryTellerActivity activity) {
+        this.activity = activity;
         this.story = new Story();
 
-        createSection("HOME","Benvenuto nell'audiogioco " + title +", sarò la tua guida lungo il percorso.","Per interagire, premi una qualsiasi parte dello schermo e attendi il bip sonoro, quindi pronuncia il tuo comando in base alle possibilità elencate.","Puoi interrompermi in qualsiasi momento premendo lo schermo per impartire un comando.","Vuoi iniziare una nuova partita, caricare una partita salvata, o ascoltare le istruzioni complete?");
-        createSection("HELP","Oltre alle diverse azioni da me suggerite al termine di ogni parte della narrazione, puoi sempre usare i seguenti comandi:","Aiuto, o istruzioni, per tornare qui.","Ripeti, per farti ripetere l'ultima parte della narrazione","Salva partita, per salvare la tua posizione nel gioco.","Carica partita, per riprendere il gioco dalla posizione precedentemente salvata.","Esci dal gioco: beh, questa è facile da capire.","Torna al gioco, per tornare alla narrazione a partire da una sezione alternativa come questa.");
-        createSection("END","La partita è giunta al termine.", "Vuoi iniziare una nuova partita, caricare una partita salvata, o uscire dal gioco?");
-        createSection("QUIT","Grazie per aver giocato " + title, "Premi lo schermo per abbandonare il gioco.");
-
+        createSections(Story.HOME, Story.HELP, Story.END, Story.QUIT);
     }
 
     public Story getStory() {
         return story;
     }
 
-    public Section createSection(final String id, final String... text)
+    private List<String> getSectionText(final String id) {
+        boolean finish = false;
+        int i = 1;
+        String paragraph;
+        List<String> text = new ArrayList<String>();
+        while(!finish) {
+            paragraph = activity.s("s_" + id + "_" + i); // es: s_home_1, s_2_3
+            if(paragraph == null)
+                finish = true;
+            else {
+                text.add(paragraph);
+                i++;
+            }
+        }
+        return text;
+    }
+
+    public void createSections(final int from, final int to)
+    {
+        for(int i = from; i <=to; i++) {
+            createSection(String.valueOf(i));
+        }
+    }
+
+    public void createSections(final String... ids){
+        for(String id: ids) {
+            createSection(id);
+        }
+    }
+
+    public Section createSection(final String id)
     {
         final Section section = new Section(id);
-        List<String> paragraphs = new ArrayList<String>(text.length);
-        for(final String paragraph: text)
-        {
-            paragraphs.add(paragraph);
-        }
-        section.setText(paragraphs);
+        section.setText(getSectionText(id));
         this.story.addSection(section);
         return section;
     }
 
-    public void createStartingSection(final String id, final String... text)
+    public void createStartingSection(final String id)
     {
-        final Section section = createSection(id, text);
+        final Section section = createSection(id);
         section.setStarting(true);
         this.story.setStarting(section);
     }
 
-    public void createEndingSection(final String id, final String... text)
+    public void createEndingSection(final String id)
     {
-        final Section section = createSection(id, text);
+        final Section section = createSection(id);
         section.setEnding(true);
     }
 

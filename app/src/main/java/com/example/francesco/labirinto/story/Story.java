@@ -21,6 +21,11 @@ public class Story implements Serializable {
 
     private boolean ended = false;
 
+    public static final String HOME = "home";
+    public static final String HELP = "help";
+    public static final String END = "end";
+    public static final String QUIT = "quit";
+
     void addSection(final Section section) {
         this.sections.put(section.getId(), section);
         this.outcomes.put(section.getId(), new ArrayList<Outcome>());
@@ -39,7 +44,7 @@ public class Story implements Serializable {
     }
 
     void introduce() {
-        setCurrent(this.sections.get("HOME"));
+        setCurrent(this.sections.get(HOME));
     }
 
     void start() throws StoryException {
@@ -69,15 +74,15 @@ public class Story implements Serializable {
     }
 
     public void proceedToHelp() {
-        setCurrent(this.sections.get("HELP"));
+        setCurrent(this.sections.get(HELP));
     }
 
     void proceedToEnd() {
-        setCurrent(this.sections.get("END"));
+        setCurrent(this.sections.get(END));
     }
 
     void proceedToQuit() {
-        setCurrent(this.sections.get("QUIT"));
+        setCurrent(this.sections.get(QUIT));
     }
 
     List<String> getOutcomes(final String id) {

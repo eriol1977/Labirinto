@@ -1,9 +1,7 @@
 package com.example.francesco.labirinto.story;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Francesco on 18/11/2014.
