@@ -29,6 +29,16 @@ public class Labirinto extends Activity {
 
     private Button button;
 
+    /**
+     * TODOS:
+     * - se si schiaccia il bottone mentre la voce parla, deve stoppare la voce e proseguire
+     * - deve salvare i dati quando si interrompe (tipo home screen)
+     * - alla fine del gioco, deve permettere di reiniziare
+     * - comando "ripeti" per ripetere la descrizione
+     * - refactoring per includere tutto il possibile nello story teller, o magari creare una Activity da estendere
+     *
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +52,6 @@ public class Labirinto extends Activity {
             exit();
         }
 
-        // TODO disattivarlo mentre la voce parla
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
