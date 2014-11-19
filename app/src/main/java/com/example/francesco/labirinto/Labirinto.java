@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.francesco.labirinto.activity.VoiceStoryTellerActivity;
 import com.example.francesco.labirinto.story.Story;
 import com.example.francesco.labirinto.story.StoryException;
 import com.example.francesco.labirinto.story.StoryMaker;
@@ -19,72 +20,24 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class Labirinto extends Activity {
-
-    private StoryTeller teller;
-
-    private TextToSpeech tts;
-
-    private static final int GET_SPEECH = 1111;
+public class Labirinto extends VoiceStoryTellerActivity {
 
     private Button button;
 
-    /**
-     * TODOS:
-     * - se si schiaccia il bottone mentre la voce parla, deve stoppare la voce e proseguire
-     * - deve salvare i dati quando si interrompe (tipo home screen)
-     * - alla fine del gioco, deve permettere di reiniziare
-     * - comando "ripeti" per ripetere la descrizione
-     * - refactoring per includere tutto il possibile nello story teller, o magari creare una Activity da estendere
-     *
-     */
+    public Labirinto() {
+        super("Labirinto");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labirinto);
 
-        teller = new StoryTeller(buildStory());
-        try {
-            teller.start();
-        } catch (StoryException e) {
-            speak("Si è verificato un errore grave! Il gioco verrà terminato.");
-            exit();
-        }
-
         button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!teller.storyHasEnded()) {
-                    if (teller.hasOneOutcome()) {
-                        teller.proceed();
-                        displayText(teller.getCurrentText());
-                    } else {
-                        getSpeech();
-                    }
-                } else {
-                    speak("La partita è terminata");
-                    exit();
-                }
-            }
-        });
-
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    tts.setLanguage(Locale.ITALIAN);
-                    displayText(teller.getCurrentText());
-                }
-            }
-        });
-
+        button.setOnClickListener(this);
     }
 
-    private Story buildStory() {
-
-        StoryMaker maker = new StoryMaker();
+    protected Story buildStory() {
 
         maker.createStartingSection("1", "Ti trovi dinanzi all'ingresso del labirinto, fauci oscure intagliate nel fianco della montagna.", "Una ventata gelida proveniente dall'interno ti fa venire la pelle d'oca.", "Entri, o torni indietro?");
         maker.createSection("2", "Maledicendo la tua vigliaccheria, volti le spalle all'entrata e torni sui tuoi passi.", "Non saprai mai quali splendidi tesori si celino nel labirinto.");
@@ -117,74 +70,4 @@ public class Labirinto extends Activity {
 
         return maker.getStory();
     }
-
-    public void displayText(List<String> text) {
-        for (String paragraph : text) {
-            speak(paragraph);
-            tts.playSilence(750, TextToSpeech.QUEUE_ADD, null);
-        }
-    }
-
-    private void speak(final String text) {
-        tts.speak(text, TextToSpeech.QUEUE_ADD, null);
-    }
-
-    private void getSpeech() {
-        Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Parla!");
-        startActivityForResult(i, GET_SPEECH);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == GET_SPEECH && resultCode == RESULT_OK) {
-            String speech = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0);
-            try {
-                teller.proceed(speech);
-                displayText(teller.getCurrentText());
-            } catch (StoryException e) {
-                speak("Azione indisponibile. Riprova.");
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void onStop() {
-        tts.stop();
-        tts.shutdown();
-        super.onPause();
-    }
-
-    private void exit() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_labirinto, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 }

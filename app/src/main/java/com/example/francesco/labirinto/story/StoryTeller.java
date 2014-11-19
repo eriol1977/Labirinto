@@ -1,19 +1,27 @@
 package com.example.francesco.labirinto.story;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class StoryTeller {
+public class StoryTeller implements Serializable {
 
     private final Story story;
+
+    private boolean endPhase = false;
 
     public StoryTeller(final Story story) {
         this.story = story;
     }
 
+    public void introduce() {
+        this.story.introduce();
+    }
+
     public void start() throws StoryException {
+        this.endPhase = false;
         this.story.start();
     }
 
@@ -26,6 +34,13 @@ public class StoryTeller {
     }
 
     public void proceed(final String outcome) throws StoryException {
+
+        if(outcome.equalsIgnoreCase("ripeti"))
+            return;
+        else if(outcome.contains("iniziare") || outcome.contains("nuova") || outcome.contains("partita")){
+            start();
+            return;
+        }
 
         String[] outcomeKeywords = outcome.split("\\s+");
         String[] candidateKeywords;
@@ -55,6 +70,11 @@ public class StoryTeller {
         }
     }
 
+    public void proceedToEnd() {
+        this.endPhase = true;
+        this.story.proceedToEnd();
+    }
+
     public boolean hasOneOutcome() {
         return this.story.hasOneOutcome();
     }
@@ -65,5 +85,9 @@ public class StoryTeller {
 
     public boolean storyHasEnded() {
         return this.story.isEnded();
+    }
+
+    public boolean isEndPhase() {
+        return endPhase;
     }
 }

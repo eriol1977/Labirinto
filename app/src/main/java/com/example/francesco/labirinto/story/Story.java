@@ -1,5 +1,6 @@
 package com.example.francesco.labirinto.story;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class Story {
+public class Story implements Serializable {
 
     private Section starting;
 
@@ -37,10 +38,15 @@ public class Story {
         sectionOutcomes.add(new Outcome(null, this.sections.get(to)));
     }
 
+    void introduce() {
+        setCurrent(this.sections.get("HOME"));
+    }
+
     void start() throws StoryException {
         if(starting == null)
             throw new StoryException();
         setCurrent(starting);
+        ended = false;
     }
 
     void proceed() {
@@ -60,6 +66,10 @@ public class Story {
         }
         if (!found)
             throw new StoryException();
+    }
+
+    void proceedToEnd() {
+        setCurrent(this.sections.get("END"));
     }
 
     List<String> getOutcomes(final String id) {

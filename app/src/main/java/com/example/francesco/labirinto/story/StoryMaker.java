@@ -10,8 +10,12 @@ public class StoryMaker {
 
     private final Story story;
 
-    public StoryMaker() {
+    public StoryMaker(final String title) {
         this.story = new Story();
+
+        createSection("HOME","Benvenuto nell'audiogioco " + title +", sarò la tua guida lungo il percorso.","Per interagire, premi una qualsiasi parte dello schermo e attendi il bip sonoro, quindi pronuncia il tuo comando in base alle possibilità elencate.","Puoi interrompermi in qualsiasi momento premendo lo schermo per impartire un comando.","Vuoi iniziare una nuova partita, caricare una partita salvata, o ascoltare le istruzioni complete?");
+        createSection("HELP","Qui troverai le istruzioni complete, quando avrò voglia di scriverle.");
+        createSection("END","La partita è giunta al termine.", "Vuoi iniziare una nuova partita, caricare una partita salvata, o uscire dal gioco?");
     }
 
     public Story getStory() {

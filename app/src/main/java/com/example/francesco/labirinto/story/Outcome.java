@@ -1,9 +1,11 @@
 package com.example.francesco.labirinto.story;
 
+import java.io.Serializable;
+
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class Outcome {
+public class Outcome implements Serializable {
 
     private final String outcome;
 
