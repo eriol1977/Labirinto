@@ -24,7 +24,6 @@ import java.util.Locale;
 /**
  * TODOS:
  * - deve salvare i dati quando si interrompe (tipo home screen)
- * - alla fine del gioco, deve permettere di reiniziare
  * - fare il tutorial per capire meglio TTS
  * - uso di file di strings piuttosto che hardcoded
  */

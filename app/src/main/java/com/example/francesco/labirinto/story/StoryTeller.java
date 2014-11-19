@@ -37,22 +37,37 @@ public class StoryTeller implements Serializable {
 
     public void proceed(final String outcome) throws StoryException {
 
-        if(outcome.equalsIgnoreCase("ripeti"))
+        if (outcome.equalsIgnoreCase("ripeti"))
             return;
 
-        if(outcome.equalsIgnoreCase("istruzioni") || outcome.equalsIgnoreCase("aiuto")) {
+        if (outcome.equalsIgnoreCase("istruzioni") || outcome.equalsIgnoreCase("aiuto")) {
             stash();
             this.story.proceedToHelp();
             return;
         }
 
-        if((outcome.contains("torna") || outcome.contains("gioco")) && stashed != null){
+        if (outcome.equals("torna al gioco") && stashed != null) {
             restore();
             return;
         }
 
-        if(outcome.contains("iniziare") || outcome.contains("nuova") || outcome.contains("partita")){
+        if (outcome.contains("iniziare") || outcome.contains("nuova") || outcome.contains("partita")) {
             start();
+            return;
+        }
+
+        if (outcome.equals("salva partita")) {
+            // TODO salvare partita
+            return;
+        }
+
+        if (outcome.equals("carica partita")) {
+            // TODO caricare partita
+            return;
+        }
+
+        if (outcome.equals("esci dal gioco")) {
+            // TODO caricare partita
             return;
         }
 
@@ -105,7 +120,7 @@ public class StoryTeller implements Serializable {
         return endPhase;
     }
 
-    private void stash(){
+    private void stash() {
         stashed = this.story.getCurrent();
     }
 
