@@ -71,6 +71,11 @@ public class StoryTeller {
             return;
         }
 
+        if (this.story.isStarted() && !this.story.isSuspended() && outcome.equalsIgnoreCase(sl.ITEMS)) {
+            this.story.setCurrent(new StoryMaker(sl).createItemsSection(this.story.getCurrent()));
+            return;
+        }
+
         if (this.story.isStarted() && outcome.equalsIgnoreCase(sl.SAVE_GAME)) {
             // TODO salvare partita
             return;

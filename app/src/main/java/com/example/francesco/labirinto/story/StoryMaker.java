@@ -43,6 +43,21 @@ public class StoryMaker {
         return text;
     }
 
+    /**
+     * ex: <item name="s_3_items" type="string">i_torch,i_key,i_rope</item>
+     *
+     * @param id
+     * @return
+     */
+    private List<Item> getSectionItems(String id) {
+        final String itemsString = sl.s("s_" + id + "_items");
+        if(itemsString != null) {
+            String[] itemIds = itemsString.split(",");
+            return story.getItems().getItems(itemIds);
+        }
+        return new ArrayList<Item>();
+    }
+
     public void createSections(final int from, final int to) {
         for (int i = from; i <= to; i++) {
             createSection(String.valueOf(i));
@@ -56,11 +71,14 @@ public class StoryMaker {
     }
 
     public Section createSection(final String id) {
-        final Section section = new Section(id, null); // FIXME load items
+        final Section section = new Section(id, story);
         section.setText(getSectionText(id));
+        section.setItems(getSectionItems(id));
         this.story.addSection(section);
         return section;
     }
+
+
 
     public void createStartingSection(final String id) {
         final Section section = createSection(id);
@@ -74,7 +92,7 @@ public class StoryMaker {
     }
 
     public Section createInventorySection(final Inventory inventory) {
-        Section inventorySection = new Section(null, null);
+        Section inventorySection = new Section(null, story);
         final List<Item> items = inventory.getItems();
         List<String> text = new ArrayList<String>(items.size() + 1);
         if (items.isEmpty())
@@ -87,6 +105,24 @@ public class StoryMaker {
         }
         inventorySection.setText(text);
         return inventorySection;
+    }
+
+    public Section createItemsSection(final Section section) {
+        Section itemsSection = new Section("temp", section.getStory());
+        final List<Item> items = section.getItems();
+        List<String> text = new ArrayList<String>(items.size() + 1);
+        if (items.isEmpty())
+            text.add(sl.EMPTY_SECTION_ITEMS);
+        else {
+            text.add(sl.SECTION_ITEMS);
+            for (Item item : items) {
+                text.add(item.getName());
+            }
+        }
+        itemsSection.setText(text);
+        section.getStory().addSection(itemsSection);
+        section.getStory().addDirectOutcome("temp", section.getId());
+        return itemsSection;
     }
 
     public void link(final String from, final String to, final String outcome) {

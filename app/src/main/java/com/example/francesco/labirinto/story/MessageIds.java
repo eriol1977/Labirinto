@@ -9,4 +9,8 @@ public interface MessageIds {
     final static String INVENTORY = "m_inventory";
 
     final static String EMPTY_INVENTORY = "m_empty_inventory";
+
+    final static String SECTION_ITEMS = "m_section_items";
+
+    final static String EMPTY_SECTION_ITEMS = "m_empty_section_items";
 }

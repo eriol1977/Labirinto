@@ -13,6 +13,8 @@ public class Section {
 
     private final String id;
 
+    private final Story story;
+
     private List<String> text;
 
     private boolean starting = false;
@@ -21,11 +23,11 @@ public class Section {
 
     private boolean oneOutcome = false;
 
-    private final List<Item> items;
+    private List<Item> items;
 
-    Section(final String id, final List<Item> items) {
+    Section(final String id, Story story) {
         this.id = id;
-        this.items = items;
+        this.story = story;
     }
 
     List<String> getText() {
@@ -56,19 +58,31 @@ public class Section {
         this.starting = starting;
     }
 
-    public boolean hasOneOutcome() {
+    boolean hasOneOutcome() {
         return oneOutcome;
     }
 
-    public void setOneOutcome(boolean oneOutcome) {
+    void setOneOutcome(boolean oneOutcome) {
         this.oneOutcome = oneOutcome;
     }
 
-    public Item getItem(final String name) throws StoryException {
+    List<Item> getItems() {
+        return items;
+    }
+
+    void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    Item getItem(final String name) throws StoryException {
         for(Item item: items) {
             if(item.getName().contains(name))
                 return item;
         }
         throw new StoryException();
+    }
+
+    public Story getStory() {
+        return story;
     }
 }

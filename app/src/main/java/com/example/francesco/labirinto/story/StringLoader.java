@@ -32,6 +32,9 @@ public class StringLoader {
     public final String INVENTORY;
     public final String INVENTORY_CONTENT;
     public final String EMPTY_INVENTORY;
+    public final String ITEMS;
+    public final String SECTION_ITEMS;
+    public final String EMPTY_SECTION_ITEMS;
 
     public StringLoader(final StoryTellerActivity activity) {
 
@@ -54,10 +57,13 @@ public class StringLoader {
         GO_STRAIGHT_ON = activity.s(CommandIds.GO_STRAIGHT_ON);
         GO_ON = activity.s(CommandIds.GO_ON);
         INVENTORY = activity.s(CommandIds.INVENTORY);
+        ITEMS = activity.s(CommandIds.ITEMS);
 
         UNAVAILABLE = activity.s(MessageIds.UNAVAILABLE);
         INVENTORY_CONTENT = activity.s(MessageIds.INVENTORY);
         EMPTY_INVENTORY = activity.s(MessageIds.EMPTY_INVENTORY);
+        SECTION_ITEMS = activity.s(MessageIds.SECTION_ITEMS);
+        EMPTY_SECTION_ITEMS = activity.s(MessageIds.EMPTY_SECTION_ITEMS);
     }
 
     public String s(final String key)

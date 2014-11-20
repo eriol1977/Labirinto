@@ -24,21 +24,23 @@ public class StoryItems {
     private void loadItems() {
         final Map<String, String> pairs = sl.getKeyValuePairsStartingWithPrefix("i_");
         String[] nameAndDescription;
-        for(String key: pairs.keySet())
-        {
+        for (String key : pairs.keySet()) {
             nameAndDescription = pairs.get(key).split("-");
             items.put(key, new Item(key, nameAndDescription[0], nameAndDescription[1]));
         }
     }
 
-    public Item getItem(final String id){
+    public Item getItem(final String id) {
         return items.get(id);
     }
 
-    public List<Item> getItems(final String... ids){
+    public List<Item> getItems(final String... ids) {
         List<Item> found = new ArrayList<Item>();
-        for(String id: ids) {
-            found.add(getItem(id));
+        Item item;
+        for (String id : ids) {
+            item = getItem(id);
+            if (item != null)
+                found.add(item);
         }
         return found;
     }
