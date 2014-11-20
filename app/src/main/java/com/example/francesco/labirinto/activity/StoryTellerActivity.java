@@ -15,7 +15,7 @@ public abstract class StoryTellerActivity extends Activity implements View.OnCli
 
     private String title;
 
-    private StringLoader stringLoader;
+    protected StringLoader sl;
 
     protected StoryTeller teller;
 
@@ -27,14 +27,14 @@ public abstract class StoryTellerActivity extends Activity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        stringLoader = new StringLoader(this);
+        sl = new StringLoader(this);
 
-        maker = new StoryMaker(stringLoader);
+        maker = new StoryMaker(sl);
 
         //if (savedInstanceState != null) {
         //    teller = (StoryTeller) savedInstanceState.getSerializable(STORY_DATA);
         //} else {
-        teller = new StoryTeller(buildStory(), stringLoader);
+        teller = new StoryTeller(buildStory(), sl);
         teller.introduce();
         //}
     }

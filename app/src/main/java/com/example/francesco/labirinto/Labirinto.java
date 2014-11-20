@@ -29,19 +29,19 @@ public class Labirinto extends VoiceStoryTellerActivity {
         maker.createEndingSection("11");
         maker.createEndingSection("12");
 
-        maker.link("1", "2", "torno indietro");
-        maker.link("1", "3", "entro");
+        maker.link("1", "2", sl.GO_BACK);
+        maker.link("1", "3", sl.ENTER);
         maker.linkDirectly("2", "11");
-        maker.link("3", "4", "destra");
-        maker.link("3", "8", "sinistra");
-        maker.link("4", "5", "proseguo dritto");
-        maker.link("4", "10", "sinistra");
-        maker.link("5", "7", "destra");
-        maker.link("5", "6", "sinistra");
+        maker.link("3", "4", sl.RIGHT);
+        maker.link("3", "8", sl.LEFT);
+        maker.link("4", "5", sl.GO_STRAIGHT_ON);
+        maker.link("4", "10", sl.LEFT);
+        maker.link("5", "7", sl.RIGHT);
+        maker.link("5", "6", sl.LEFT);
         maker.linkDirectly("6", "11");
         maker.linkDirectly("7", "12");
-        maker.link("8", "4", "torno indietro");
-        maker.link("8", "9", "proseguo");
+        maker.link("8", "4", sl.GO_BACK);
+        maker.link("8", "9", sl.GO_ON);
         maker.linkDirectly("9", "11");
         maker.linkDirectly("10", "11");
 
