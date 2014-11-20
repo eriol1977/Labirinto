@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="title" type="string">Labirinto</item>
 
+    <!-- labels -->
+    <item name="l_title" type="string">Labirinto</item>
+    <item name="l_prompt" type="string">comando:</item>
+
+    <!-- messages -->
+    <item name="m_unavailable" type="string">azione indisponibile. riprova</item>
+
+    <!-- commands -->
+    <item name="c_go_back" type="string">torno indietro</item>
+    <item name="c_enter" type="string">entro</item>
+    <item name="c_right" type="string">destra</item>
+    <item name="c_left" type="string">sinistra</item>
+    <item name="c_go_straight_on" type="string">proseguo dritto</item>
+    <item name="c_go_on" type="string">proseguo</item>
+    <item name="c_repeat" type="string">ripeti</item>
+    <item name="c_instructions" type="string">istruzioni</item>
+    <item name="c_help" type="string">aiuto</item>
+    <item name="c_back_to_game" type="string">torna al gioco</item>
+    <item name="c_start" type="string">iniziare</item>
+    <item name="c_new" type="string">nuova</item>
+    <item name="c_game" type="string">partita</item>
+    <item name="c_save_game" type="string">salva partita</item>
+    <item name="c_load_game" type="string">carica partita</item>
+    <item name="c_quit" type="string">esci dal gioco</item>
+
+    <!-- sections -->
     <item name="s_home_1" type="string">Benvenuto nell\'audiogioco Labirinto, sarò la tua guida lungo il percorso.</item>
     <item name="s_home_2" type="string">Per interagire, premi una qualsiasi parte dello schermo e attendi il bip sonoro, quindi pronuncia il tuo comando in base ai miei suggerimenti.</item>
     <item name="s_home_3" type="string">Puoi interrompermi in qualsiasi momento premendo lo schermo per impartire un comando.</item>

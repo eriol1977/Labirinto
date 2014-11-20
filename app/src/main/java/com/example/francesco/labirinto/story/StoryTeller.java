@@ -6,9 +6,11 @@ import java.util.List;
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class StoryTeller implements Serializable {
+public class StoryTeller {
 
     private final Story story;
+
+    private final StringLoader sl;
 
     private Section stashed;
 
@@ -16,8 +18,9 @@ public class StoryTeller implements Serializable {
 
     private boolean quit = false;
 
-    public StoryTeller(final Story story) {
+    public StoryTeller(final Story story, final StringLoader sl) {
         this.story = story;
+        this.sl = sl;
     }
 
     public void introduce() {
@@ -39,36 +42,36 @@ public class StoryTeller implements Serializable {
 
     public void proceed(final String outcome) throws StoryException {
 
-        if (outcome.equalsIgnoreCase("ripeti"))
+        if (outcome.equalsIgnoreCase(sl.REPEAT))
             return;
 
-        if (outcome.equalsIgnoreCase("istruzioni") || outcome.equalsIgnoreCase("aiuto")) {
+        if (outcome.equalsIgnoreCase(sl.INSTRUCTIONS) || outcome.equalsIgnoreCase(sl.HELP)) {
             stash();
             this.story.proceedToHelp();
             return;
         }
 
-        if (outcome.equals("torna al gioco") && stashed != null) {
+        if (outcome.equals(sl.BACK_TO_GAME) && stashed != null) {
             restore();
             return;
         }
 
-        if (outcome.contains("iniziare") || outcome.contains("nuova") || outcome.contains("partita")) {
+        if (outcome.contains(sl.START) || outcome.contains(sl.NEW) || outcome.contains(sl.GAME)) {
             start();
             return;
         }
 
-        if (outcome.equals("salva partita")) {
+        if (outcome.equals(sl.SAVE_GAME)) {
             // TODO salvare partita
             return;
         }
 
-        if (outcome.equals("carica partita")) {
+        if (outcome.equals(sl.LOAD_GAME)) {
             // TODO caricare partita
             return;
         }
 
-        if (outcome.equals("esci dal gioco")) {
+        if (outcome.equals(sl.QUIT)) {
             this.story.proceedToQuit();
             quit = true;
             return;

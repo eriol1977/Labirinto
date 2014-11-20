@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class Story implements Serializable {
+public class Story {
 
     private Section starting;
 

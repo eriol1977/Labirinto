@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class Section implements Serializable {
+public class Section {
 
     private final String id;
 

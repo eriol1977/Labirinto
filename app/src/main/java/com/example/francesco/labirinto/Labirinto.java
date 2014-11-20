@@ -13,7 +13,7 @@ public class Labirinto extends VoiceStoryTellerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle(getResources().getString(R.string.title));
+        setTitle(getResources().getString(R.string.l_title));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_labirinto);

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Francesco on 18/11/2014.
  */
-public class Outcome implements Serializable {
+public class Outcome {
 
     private final String outcome;
 

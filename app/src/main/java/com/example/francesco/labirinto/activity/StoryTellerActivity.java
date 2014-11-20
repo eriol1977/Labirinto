@@ -7,31 +7,36 @@ import android.view.View;
 import com.example.francesco.labirinto.story.Story;
 import com.example.francesco.labirinto.story.StoryMaker;
 import com.example.francesco.labirinto.story.StoryTeller;
+import com.example.francesco.labirinto.story.StringLoader;
 
 import java.util.List;
 
-public abstract class StoryTellerActivity extends Activity implements View.OnClickListener  {
+public abstract class StoryTellerActivity extends Activity implements View.OnClickListener {
 
     private String title;
+
+    private StringLoader stringLoader;
 
     protected StoryTeller teller;
 
     protected StoryMaker maker;
 
-    private static final String STORY_DATA = "STORY_DATA";
+    //private static final String STORY_DATA = "STORY_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        maker = new StoryMaker(this);
+        stringLoader = new StringLoader(this);
 
-        if (savedInstanceState != null) {
-            teller = (StoryTeller) savedInstanceState.getSerializable(STORY_DATA);
-        } else {
-            teller = new StoryTeller(buildStory());
-            teller.introduce();
-        }
+        maker = new StoryMaker(stringLoader);
+
+        //if (savedInstanceState != null) {
+        //    teller = (StoryTeller) savedInstanceState.getSerializable(STORY_DATA);
+        //} else {
+        teller = new StoryTeller(buildStory(), stringLoader);
+        teller.introduce();
+        //}
     }
 
     protected abstract Story buildStory();
@@ -63,11 +68,11 @@ public abstract class StoryTellerActivity extends Activity implements View.OnCli
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(STORY_DATA, teller);
-        super.onSaveInstanceState(outState);
-    }
+    //@Override
+    //protected void onSaveInstanceState(Bundle outState) {
+    //    outState.putSerializable(STORY_DATA, teller);
+    //    super.onSaveInstanceState(outState);
+    //}
 
     protected void setTitle(String title) {
         this.title = title;
