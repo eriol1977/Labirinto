@@ -82,6 +82,10 @@ public class Section {
         throw new StoryException();
     }
 
+    void removeItem(final Item item) {
+        this.items.remove(item);
+    }
+
     public Story getStory() {
         return story;
     }

@@ -91,8 +91,8 @@ public class StoryMaker {
         section.setEnding(true);
     }
 
-    public Section createInventorySection(final Inventory inventory) {
-        Section inventorySection = new Section(null, story);
+    public Section createInventorySection(final Inventory inventory, final Section current) {
+        Section inventorySection = new Section("temp", current.getStory());
         final List<Item> items = inventory.getItems();
         List<String> text = new ArrayList<String>(items.size() + 1);
         if (items.isEmpty())
@@ -104,12 +104,14 @@ public class StoryMaker {
             }
         }
         inventorySection.setText(text);
+        current.getStory().addSection(inventorySection);
+        current.getStory().addDirectOutcome("temp", current.getId());
         return inventorySection;
     }
 
-    public Section createItemsSection(final Section section) {
-        Section itemsSection = new Section("temp", section.getStory());
-        final List<Item> items = section.getItems();
+    public Section createItemsSection(final Section current) {
+        Section itemsSection = new Section("temp", current.getStory());
+        final List<Item> items = current.getItems();
         List<String> text = new ArrayList<String>(items.size() + 1);
         if (items.isEmpty())
             text.add(sl.EMPTY_SECTION_ITEMS);
@@ -120,9 +122,36 @@ public class StoryMaker {
             }
         }
         itemsSection.setText(text);
-        section.getStory().addSection(itemsSection);
-        section.getStory().addDirectOutcome("temp", section.getId());
+        current.getStory().addSection(itemsSection);
+        current.getStory().addDirectOutcome("temp", current.getId());
         return itemsSection;
+    }
+
+    public Section createGetSection(final Section current, final String what, final Inventory inventory) {
+        final List<Item> items = current.getItems();
+        Item item = null;
+        for(Item i: items) {
+            if(what.contains(i.getName())) {
+                item = i;
+                break;
+            }
+        }
+
+        List<String> text = new ArrayList<String>();
+        if(item != null) {
+            text.add(sl.YOU_GOT);
+            text.add(item.getName());
+            inventory.addItem(item);
+            current.removeItem(item);
+        }else{
+            text.add(sl.NO_OBJECT);
+        }
+
+        Section getSection = new Section("temp", current.getStory());
+        getSection.setText(text);
+        current.getStory().addSection(getSection);
+        current.getStory().addDirectOutcome("temp", current.getId());
+        return getSection;
     }
 
     public void link(final String from, final String to, final String outcome) {

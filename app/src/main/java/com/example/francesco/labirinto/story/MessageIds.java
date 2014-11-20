@@ -13,4 +13,8 @@ public interface MessageIds {
     final static String SECTION_ITEMS = "m_section_items";
 
     final static String EMPTY_SECTION_ITEMS = "m_empty_section_items";
+
+    final static String YOU_GOT = "m_you_got";
+
+    final static String NO_OBJECT = "m_no_object";
 }

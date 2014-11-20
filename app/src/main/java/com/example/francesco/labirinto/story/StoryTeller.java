@@ -66,13 +66,17 @@ public class StoryTeller {
         }
 
         if (this.story.isStarted() && !this.story.isSuspended() && outcome.equalsIgnoreCase(sl.INVENTORY)) {
-            stash();
-            this.story.setCurrent(new StoryMaker(sl).createInventorySection(character.getInventory()));
+            this.story.setCurrent(new StoryMaker(sl).createInventorySection(character.getInventory(),this.story.getCurrent()));
             return;
         }
 
         if (this.story.isStarted() && !this.story.isSuspended() && outcome.equalsIgnoreCase(sl.ITEMS)) {
             this.story.setCurrent(new StoryMaker(sl).createItemsSection(this.story.getCurrent()));
+            return;
+        }
+
+        if (this.story.isStarted() && !this.story.isSuspended() && outcome.contains(sl.GET)) {
+            this.story.setCurrent(new StoryMaker(sl).createGetSection(this.story.getCurrent(),outcome,character.getInventory()));
             return;
         }
 

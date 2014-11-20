@@ -22,4 +22,5 @@ public interface CommandIds {
     final static String QUIT = "c_quit";
     final static String INVENTORY = "c_inventory";
     final static String ITEMS = "c_items";
+    final static String GET = "c_get";
 }

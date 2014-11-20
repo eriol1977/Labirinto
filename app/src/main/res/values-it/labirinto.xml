@@ -11,6 +11,8 @@
     <item name="m_empty_inventory" type="string">non possiedi oggetti</item>
     <item name="m_section_items" type="string">ci sono i seguenti oggetti:</item>
     <item name="m_empty_section_items" type="string">non c\'è alcun oggetto</item>
+    <item name="m_you_got" type="string">hai preso </item>
+    <item name="m_no_object" type="string">quest\'oggetto non c\'è!</item>
 
     <!-- commands -->
     <item name="c_go_back" type="string">torno indietro</item>
@@ -31,6 +33,7 @@
     <item name="c_quit" type="string">esci dal gioco</item>
     <item name="c_inventory" type="string">inventario</item>
     <item name="c_items" type="string">oggetti</item>
+    <item name="c_get" type="string">prendo</item>
 
     <!-- items -->
     <item name="i_torch" type="string">torcia-la torcia è del tutto comune</item>
