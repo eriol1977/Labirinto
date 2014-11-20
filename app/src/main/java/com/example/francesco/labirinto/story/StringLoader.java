@@ -3,6 +3,7 @@ package com.example.francesco.labirinto.story;
 import com.example.francesco.labirinto.activity.StoryTellerActivity;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by Francesco on 20/11/2014.
@@ -28,6 +29,9 @@ public class StringLoader {
     public final String LOAD_GAME;
     public final String QUIT;
     public final String UNAVAILABLE;
+    public final String INVENTORY;
+    public final String INVENTORY_CONTENT;
+    public final String EMPTY_INVENTORY;
 
     public StringLoader(final StoryTellerActivity activity) {
 
@@ -49,12 +53,19 @@ public class StringLoader {
         LEFT = activity.s(CommandIds.LEFT);
         GO_STRAIGHT_ON = activity.s(CommandIds.GO_STRAIGHT_ON);
         GO_ON = activity.s(CommandIds.GO_ON);
+        INVENTORY = activity.s(CommandIds.INVENTORY);
 
         UNAVAILABLE = activity.s(MessageIds.UNAVAILABLE);
+        INVENTORY_CONTENT = activity.s(MessageIds.INVENTORY);
+        EMPTY_INVENTORY = activity.s(MessageIds.EMPTY_INVENTORY);
     }
 
     public String s(final String key)
     {
         return this.activity.s(key);
+    }
+
+    public Map<String, String> getKeyValuePairsStartingWithPrefix(final String prefix) {
+        return this.activity.getKeyValuePairsStartingWithPrefix(prefix);
     }
 }

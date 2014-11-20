@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public class Story {
 
+    private final StoryItems items;
+
     private Section starting;
 
     private Section current;
@@ -19,12 +21,20 @@ public class Story {
 
     private final Map<String, List<Outcome>> outcomes = new HashMap<String, List<Outcome>>();
 
+    private boolean started = false;
+
     private boolean ended = false;
+
+    private boolean suspended = false; // per esempio, nel menu di aiuto o nell'inventario
 
     public static final String HOME = "home";
     public static final String HELP = "help";
     public static final String END = "end";
     public static final String QUIT = "quit";
+
+    public Story(final StoryItems items) {
+        this.items = items;
+    }
 
     void addSection(final Section section) {
         this.sections.put(section.getId(), section);
@@ -51,6 +61,7 @@ public class Story {
         if(starting == null)
             throw new StoryException();
         setCurrent(starting);
+        started = true;
         ended = false;
     }
 
@@ -78,6 +89,7 @@ public class Story {
     }
 
     void proceedToEnd() {
+
         setCurrent(this.sections.get(END));
     }
 
@@ -87,6 +99,8 @@ public class Story {
 
     List<String> getOutcomes(final String id) {
         final List<Outcome> sectionOutcomes = this.outcomes.get(id);
+        if(sectionOutcomes == null)
+            return new ArrayList<String>();
         final List<String> result =  new ArrayList<String>(sectionOutcomes.size());
         for(final Outcome o: sectionOutcomes) {
             result.add(o.getOutcome());
@@ -110,12 +124,27 @@ public class Story {
         this.current = current;
         if (current.isEnding()) {
             this.ended = true;
+            this.started = false;
         }
+    }
+
+    public boolean isStarted() {
+        return started;
     }
 
     boolean isEnded() {
         return ended;
     }
 
+    public StoryItems getItems() {
+        return items;
+    }
 
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
+    }
 }

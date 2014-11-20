@@ -6,7 +6,9 @@
     <item name="l_prompt" type="string">Comando?</item>
 
     <!-- messages -->
-    <item name="m_unavailable" type="string">non ho capito, ripeti per favore</item>
+    <item name="m_unavailable" type="string">azione invalida</item>
+    <item name="m_inventory" type="string">possiedi i seguenti oggetti:</item>
+    <item name="m_empty_inventory" type="string">non possiedi oggetti</item>
 
     <!-- commands -->
     <item name="c_go_back" type="string">torno indietro</item>
@@ -25,6 +27,11 @@
     <item name="c_save_game" type="string">salva partita</item>
     <item name="c_load_game" type="string">carica partita</item>
     <item name="c_quit" type="string">esci dal gioco</item>
+    <item name="c_inventory" type="string">inventario</item>
+
+    <!-- items -->
+    <item name="i_torch" type="string">torcia-la torcia è del tutto comune</item>
+    <item name="i_key" type="string">chiave-La chiave, pur consumata dal tempo, presenta ancora qualche traccia di tinta dorata.</item>
 
     <!-- sections -->
     <item name="s_home_1" type="string">Benvenuto nell\'audiogioco Labirinto, sarò la tua guida lungo il percorso.</item>
@@ -55,7 +62,9 @@
 
     <item name="s_3_1" type="string">Trattenendo il respiro, fai un passo ed entri nell\'oscurità del labirinto.</item>
     <item name="s_3_2" type="string">Il tunnel di pietra prosegue dritto per una cinquantina di passi, prima di dividersi.</item>
-    <item name="s_3_3" type="string">Vai a destra o a sinistra?</item>
+    <item name="s_3_3" type="string">Una torcia appesa alla parete segnala il crocevia.</item>
+    <item name="s_3_4" type="string">Vai a destra o a sinistra?</item>
+    <item name="s_3_items" type="string">i_torch</item>
 
     <item name="s_4_1" type="string">Svolti a destra e prosegui nella luce sempre più fioca, sino a trovarti di fronte a una nuova diramazione.</item>
     <item name="s_4_2" type="string">Davanti a te si ode uno strano brontolio.</item>

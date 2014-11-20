@@ -20,4 +20,5 @@ public interface CommandIds {
     final static String SAVE_GAME = "c_save_game";
     final static String LOAD_GAME = "c_load_game";
     final static String QUIT = "c_quit";
+    final static String INVENTORY = "c_inventory";
 }

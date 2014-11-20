@@ -1,5 +1,8 @@
 package com.example.francesco.labirinto.story;
 
+import com.example.francesco.labirinto.character.Inventory;
+import com.example.francesco.labirinto.character.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +13,11 @@ public class StoryMaker {
 
     private final Story story;
 
-    final StringLoader sl;
+    private final StringLoader sl;
 
     public StoryMaker(final StringLoader sl) {
         this.sl = sl;
-        this.story = new Story();
+        this.story = new Story(new StoryItems(sl));
 
         createSections(Story.HOME, Story.HELP, Story.END, Story.QUIT);
     }
@@ -53,7 +56,7 @@ public class StoryMaker {
     }
 
     public Section createSection(final String id) {
-        final Section section = new Section(id);
+        final Section section = new Section(id, null); // FIXME load items
         section.setText(getSectionText(id));
         this.story.addSection(section);
         return section;
@@ -68,6 +71,22 @@ public class StoryMaker {
     public void createEndingSection(final String id) {
         final Section section = createSection(id);
         section.setEnding(true);
+    }
+
+    public Section createInventorySection(final Inventory inventory) {
+        Section inventorySection = new Section(null, null);
+        final List<Item> items = inventory.getItems();
+        List<String> text = new ArrayList<String>(items.size() + 1);
+        if (items.isEmpty())
+            text.add(sl.EMPTY_INVENTORY);
+        else {
+            text.add(sl.INVENTORY_CONTENT);
+            for (Item item : items) {
+                text.add(item.getName());
+            }
+        }
+        inventorySection.setText(text);
+        return inventorySection;
     }
 
     public void link(final String from, final String to, final String outcome) {

@@ -1,6 +1,9 @@
 package com.example.francesco.labirinto.story;
 
+import com.example.francesco.labirinto.character.Item;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +21,11 @@ public class Section {
 
     private boolean oneOutcome = false;
 
-    Section(final String id) {
+    private final List<Item> items;
+
+    Section(final String id, final List<Item> items) {
         this.id = id;
+        this.items = items;
     }
 
     List<String> getText() {
@@ -56,5 +62,13 @@ public class Section {
 
     public void setOneOutcome(boolean oneOutcome) {
         this.oneOutcome = oneOutcome;
+    }
+
+    public Item getItem(final String name) throws StoryException {
+        for(Item item: items) {
+            if(item.getName().contains(name))
+                return item;
+        }
+        throw new StoryException();
     }
 }

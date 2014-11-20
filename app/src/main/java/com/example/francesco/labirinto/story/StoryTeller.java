@@ -1,12 +1,15 @@
 package com.example.francesco.labirinto.story;
 
-import java.io.Serializable;
+import com.example.francesco.labirinto.character.Character;
+
 import java.util.List;
 
 /**
  * Created by Francesco on 18/11/2014.
  */
 public class StoryTeller {
+
+    private final com.example.francesco.labirinto.character.Character character;
 
     private final Story story;
 
@@ -19,6 +22,7 @@ public class StoryTeller {
     private boolean quit = false;
 
     public StoryTeller(final Story story, final StringLoader sl) {
+        this.character = new Character();
         this.story = story;
         this.sl = sl;
     }
@@ -45,13 +49,13 @@ public class StoryTeller {
         if (outcome.equalsIgnoreCase(sl.REPEAT))
             return;
 
-        if (outcome.equalsIgnoreCase(sl.INSTRUCTIONS) || outcome.equalsIgnoreCase(sl.HELP)) {
+        if (!this.story.isSuspended() && (outcome.equalsIgnoreCase(sl.INSTRUCTIONS) || outcome.equalsIgnoreCase(sl.HELP))) {
             stash();
             this.story.proceedToHelp();
             return;
         }
 
-        if (outcome.equals(sl.BACK_TO_GAME) && stashed != null) {
+        if (outcome.equalsIgnoreCase(sl.BACK_TO_GAME) && stashed != null) {
             restore();
             return;
         }
@@ -61,17 +65,23 @@ public class StoryTeller {
             return;
         }
 
-        if (outcome.equals(sl.SAVE_GAME)) {
+        if (this.story.isStarted() && !this.story.isSuspended() && outcome.equalsIgnoreCase(sl.INVENTORY)) {
+            stash();
+            this.story.setCurrent(new StoryMaker(sl).createInventorySection(character.getInventory()));
+            return;
+        }
+
+        if (this.story.isStarted() && outcome.equalsIgnoreCase(sl.SAVE_GAME)) {
             // TODO salvare partita
             return;
         }
 
-        if (outcome.equals(sl.LOAD_GAME)) {
+        if (outcome.equalsIgnoreCase(sl.LOAD_GAME)) {
             // TODO caricare partita
             return;
         }
 
-        if (outcome.equals(sl.QUIT)) {
+        if (outcome.equalsIgnoreCase(sl.QUIT)) {
             this.story.proceedToQuit();
             quit = true;
             return;
@@ -128,10 +138,12 @@ public class StoryTeller {
 
     private void stash() {
         stashed = this.story.getCurrent();
+        this.story.setSuspended(true);
     }
 
     private void restore() {
         this.story.setCurrent(stashed);
+        this.story.setSuspended(false);
         stashed = null;
     }
 

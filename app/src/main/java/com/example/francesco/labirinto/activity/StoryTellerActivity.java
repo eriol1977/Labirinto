@@ -4,17 +4,22 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.francesco.labirinto.R;
 import com.example.francesco.labirinto.story.Story;
 import com.example.francesco.labirinto.story.StoryMaker;
 import com.example.francesco.labirinto.story.StoryTeller;
 import com.example.francesco.labirinto.story.StringLoader;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * TODOS:
  * - immagazzinare i dati quando si interrompe la partita per un po' (tipo home screen, o telefonata ricevuta...)
- *  [dopo un back, ricomincia da capo; dopo un home, resta senza voce]
+ * [dopo un back, ricomincia da capo; dopo un home, resta senza voce]
  * - implementare salva e carica partita
  * - commentare codice
  * - implementare comandi inventario, prendi, usa
@@ -95,5 +100,21 @@ public abstract class StoryTellerActivity extends Activity implements View.OnCli
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Map<String, String> getKeyValuePairsStartingWithPrefix(final String prefix) {
+        Map<String, String> result = new HashMap<String, String>();
+        for (Field field : R.string.class.getDeclaredFields()) {
+            if (Modifier.isStatic(field.getModifiers()) && !Modifier.isPrivate(field.getModifiers()) && field.getType().equals(int.class)) {
+                try {
+                    if (field.getName().startsWith(prefix)) {
+                        result.put(field.getName(), getResources().getString(field.getInt(null)));
+                    }
+                } catch (Exception e) {
+                    // ignore
+                }
+            }
+        }
+        return result;
     }
 }
