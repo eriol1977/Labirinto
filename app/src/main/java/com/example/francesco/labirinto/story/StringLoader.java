@@ -27,6 +27,7 @@ public class StringLoader {
     public final String SAVE_GAME;
     public final String LOAD_GAME;
     public final String QUIT;
+    public final String UNAVAILABLE;
 
     public StringLoader(final StoryTellerActivity activity) {
 
@@ -48,6 +49,8 @@ public class StringLoader {
         LEFT = activity.s(CommandIds.LEFT);
         GO_STRAIGHT_ON = activity.s(CommandIds.GO_STRAIGHT_ON);
         GO_ON = activity.s(CommandIds.GO_ON);
+
+        UNAVAILABLE = activity.s(MessageIds.UNAVAILABLE);
     }
 
     public String s(final String key)

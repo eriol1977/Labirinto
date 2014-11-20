@@ -11,6 +11,16 @@ import com.example.francesco.labirinto.story.StringLoader;
 
 import java.util.List;
 
+/**
+ * TODOS:
+ * - immagazzinare i dati quando si interrompe la partita per un po' (tipo home screen, o telefonata ricevuta...)
+ *  [dopo un back, ricomincia da capo; dopo un home, resta senza voce]
+ * - implementare salva e carica partita
+ * - commentare codice
+ * - implementare comandi inventario, prendi, usa
+ * - testare storiella in inglese/portoghese
+ */
+
 public abstract class StoryTellerActivity extends Activity implements View.OnClickListener {
 
     private String title;

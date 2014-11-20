@@ -6,20 +6,13 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 
+import com.example.francesco.labirinto.R;
 import com.example.francesco.labirinto.story.StoryException;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-/**
- * TODOS:
- * - immagazzinare i dati quando si interrompe la partita per un po' (tipo home screen, o telefonata ricevuta...)
- *  [dopo un back, ricomincia da capo; dopo un home, resta senza voce]
- * - usare file di strings piuttosto che hardcoded
- * - implementare salva e carica partita
- */
 
 public abstract class VoiceStoryTellerActivity extends StoryTellerActivity {
 
@@ -58,7 +51,7 @@ public abstract class VoiceStoryTellerActivity extends StoryTellerActivity {
     protected void processInput() {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Comando?");
+        i.putExtra(RecognizerIntent.EXTRA_PROMPT, R.string.l_prompt);
         startActivityForResult(i, GET_SPEECH);
     }
 
@@ -109,7 +102,7 @@ public abstract class VoiceStoryTellerActivity extends StoryTellerActivity {
                 teller.proceed(speech);
                 displayText(teller.getCurrentText());
             } catch (StoryException e) {
-                speak("Azione indisponibile. Riprova.");
+                speak(sl.UNAVAILABLE);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

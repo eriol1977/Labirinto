@@ -3,10 +3,10 @@
 
     <!-- labels -->
     <item name="l_title" type="string">Labirinto</item>
-    <item name="l_prompt" type="string">comando:</item>
+    <item name="l_prompt" type="string">Comando?</item>
 
     <!-- messages -->
-    <item name="m_unavailable" type="string">azione indisponibile. riprova</item>
+    <item name="m_unavailable" type="string">non ho capito, ripeti per favore</item>
 
     <!-- commands -->
     <item name="c_go_back" type="string">torno indietro</item>
