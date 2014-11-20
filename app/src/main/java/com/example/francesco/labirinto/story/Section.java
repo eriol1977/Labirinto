@@ -75,8 +75,8 @@ public class Section {
     }
 
     Item getItem(final String name) throws StoryException {
-        for(Item item: items) {
-            if(item.getName().contains(name))
+        for (Item item : items) {
+            if (item.getName().contains(name))
                 return item;
         }
         throw new StoryException();
@@ -88,5 +88,10 @@ public class Section {
 
     public Story getStory() {
         return story;
+    }
+
+    void removeParagraph(final int index) {
+        if (index > 0)
+            this.text.remove(index - 1);
     }
 }

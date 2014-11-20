@@ -44,16 +44,31 @@ public class StoryMaker {
     }
 
     /**
-     * ex: <item name="s_3_items" type="string">i_torch,i_key,i_rope</item>
+     * oggetti della sezione separati da virgole
+     * ogni oggetto assume il seguente formato
+     * <<id oggetto>>:<<numero del paragrafo da rimuovere quando l'oggetto viene preso>>:<<numero del paragrafo da aggiungere
+     * quando l'oggetto viene preso, o 0 per non aggiungere nulla>>
+     *
+     * ex: <item name="s_3_items" type="string">i_torch:3:5,i_key:1:0,i_rope:4:0</item>
      *
      * @param id
-     * @return
+     * @return oggetti della sezione
      */
     private List<Item> getSectionItems(String id) {
-        final String itemsString = sl.s("s_" + id + "_items");
-        if(itemsString != null) {
-            String[] itemIds = itemsString.split(",");
-            return story.getItems().getItems(itemIds);
+        final String itemGroup = sl.s("s_" + id + "_items");
+        if(itemGroup != null) {
+            String[] itemStrings = itemGroup.split(",");
+            List<Item> items =  new ArrayList<Item>(itemStrings.length);
+            String[] tokens;
+            Item item;
+            for(String itemString: itemStrings) {
+                tokens = itemString.split(":");
+                item = story.getItems().getItem(tokens[0]);
+                item.setParagraphToAdd(Integer.valueOf(tokens[1]).intValue());
+                item.setParagraphToRemove(Integer.valueOf(tokens[2]).intValue());
+                items.add(item);
+            }
+            return items;
         }
         return new ArrayList<Item>();
     }
@@ -143,6 +158,7 @@ public class StoryMaker {
             text.add(item.getName());
             inventory.addItem(item);
             current.removeItem(item);
+            current.removeParagraph(item.getParagraphToRemove());
         }else{
             text.add(sl.NO_OBJECT);
         }

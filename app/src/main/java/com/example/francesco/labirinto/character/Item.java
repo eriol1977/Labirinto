@@ -11,6 +11,10 @@ public class Item {
 
     final private String description;
 
+    private int paragraphToRemove;
+
+    private int paragraphToAdd;
+
     public Item(String id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -27,6 +31,22 @@ public class Item {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getParagraphToRemove() {
+        return paragraphToRemove;
+    }
+
+    public void setParagraphToRemove(int paragraphToRemove) {
+        this.paragraphToRemove = paragraphToRemove;
+    }
+
+    public int getParagraphToAdd() {
+        return paragraphToAdd;
+    }
+
+    public void setParagraphToAdd(int paragraphToAdd) {
+        this.paragraphToAdd = paragraphToAdd;
     }
 
     @Override
