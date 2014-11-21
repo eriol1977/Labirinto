@@ -2,8 +2,6 @@ package com.example.francesco.labirinto.story;
 
 import com.example.francesco.labirinto.character.Item;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,8 +88,13 @@ public class Section {
         return story;
     }
 
-    void removeParagraph(final int index) {
-        if (index > 0)
-            this.text.remove(index - 1);
+    void switchParagraph(Item item) {
+        final int index = item.getParagraphToRemove() - 1;
+        final String newParagraph = item.getParagraphToAdd();
+        if (index >= 0) {
+            this.text.remove(index);
+            if (!newParagraph.isEmpty())
+                this.text.add(index, newParagraph);
+        }
     }
 }

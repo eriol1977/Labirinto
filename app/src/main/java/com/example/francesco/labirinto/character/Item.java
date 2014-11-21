@@ -13,7 +13,7 @@ public class Item {
 
     private int paragraphToRemove;
 
-    private int paragraphToAdd;
+    private String paragraphToAdd;
 
     public Item(String id, String name, String description) {
         this.id = id;
@@ -41,11 +41,11 @@ public class Item {
         this.paragraphToRemove = paragraphToRemove;
     }
 
-    public int getParagraphToAdd() {
+    public String getParagraphToAdd() {
         return paragraphToAdd;
     }
 
-    public void setParagraphToAdd(int paragraphToAdd) {
+    public void setParagraphToAdd(String paragraphToAdd) {
         this.paragraphToAdd = paragraphToAdd;
     }
 
@@ -65,4 +65,5 @@ public class Item {
     public int hashCode() {
         return id.hashCode();
     }
+
 }

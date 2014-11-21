@@ -70,7 +70,7 @@
     <item name="s_3_2" type="string">Il tunnel di pietra prosegue dritto per una cinquantina di passi, prima di dividersi.</item>
     <item name="s_3_3" type="string">Una torcia appesa alla parete segnala il crocevia.</item>
     <item name="s_3_4" type="string">Vai a destra o a sinistra?</item>
-    <item name="s_3_items" type="string">i_torch:3:0</item>
+    <item name="s_3_items" type="string">i_torch:3:C\'è un gancio appeso alla parete, dove hai preso la torcia</item>
 
     <item name="s_4_1" type="string">Svolti a destra e prosegui nella luce sempre più fioca, sino a trovarti di fronte a una nuova diramazione.</item>
     <item name="s_4_2" type="string">Davanti a te si ode uno strano brontolio.</item>
