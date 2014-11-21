@@ -154,8 +154,7 @@ public class StoryMaker {
 
         List<String> text = new ArrayList<String>();
         if(item != null) {
-            text.add(sl.YOU_GOT);
-            text.add(item.getName());
+            text.add(sl.s("s_" + current.getId() + "_get_" + item.getId()));
             inventory.addItem(item);
             current.removeItem(item);
             current.switchParagraph(item);

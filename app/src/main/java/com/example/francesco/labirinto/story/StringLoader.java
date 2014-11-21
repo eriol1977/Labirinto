@@ -36,7 +36,6 @@ public class StringLoader {
     public final String SECTION_ITEMS;
     public final String EMPTY_SECTION_ITEMS;
     public final String GET;
-    public final String YOU_GOT;
     public final String NO_OBJECT;
 
     public StringLoader(final StoryTellerActivity activity) {
@@ -68,7 +67,6 @@ public class StringLoader {
         EMPTY_INVENTORY = activity.s(MessageIds.EMPTY_INVENTORY);
         SECTION_ITEMS = activity.s(MessageIds.SECTION_ITEMS);
         EMPTY_SECTION_ITEMS = activity.s(MessageIds.EMPTY_SECTION_ITEMS);
-        YOU_GOT = activity.s(MessageIds.YOU_GOT);
         NO_OBJECT = activity.s(MessageIds.NO_OBJECT);
     }
 

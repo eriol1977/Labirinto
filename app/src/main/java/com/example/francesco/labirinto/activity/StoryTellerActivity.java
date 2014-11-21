@@ -22,7 +22,7 @@ import java.util.Map;
  * [dopo un back, ricomincia da capo; dopo un home, resta senza voce]
  * - implementare salva e carica partita
  * - commentare codice
- * - implementare comandi inventario, oggetti, prendi, usa
+ * - implementare comandi inventario, oggetti, prendi, usa, esamina
  * - testare storiella in inglese/portoghese
  * - rendere uniforme lo StoryTeller: usare stash() o fare come inventario per le sezioni extra?
  */
