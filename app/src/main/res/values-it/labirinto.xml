@@ -18,8 +18,8 @@
     <item name="c_enter" type="string">entro</item>
     <item name="c_right" type="string">destra</item>
     <item name="c_left" type="string">sinistra</item>
-    <item name="c_go_straight_on" type="string">proseguo dritto</item>
-    <item name="c_go_on" type="string">proseguo</item>
+    <item name="c_go_straight_on" type="string">proseguo avanzo dritto</item>
+    <item name="c_go_on" type="string">proseguo avanzo</item>
     <item name="c_repeat" type="string">ripeti</item>
     <item name="c_instructions" type="string">istruzioni</item>
     <item name="c_help" type="string">aiuto</item>
